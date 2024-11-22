@@ -10,7 +10,7 @@ def test_model_requirements():
     assert n_params < 25000, f"Model has {n_params} parameters, should be less than 25000"
     
     # Test accuracy
-    assert train_acc >= 90.0, f"Training accuracy is {train_acc:.2f}%, should be at least 90%"
+    assert train_acc >= 95.0, f"Training accuracy is {train_acc:.2f}%, should be at least 95%"
     
     print("All requirements met!")
     print(f"Parameters: {n_params}")

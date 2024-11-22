@@ -1,4 +1,6 @@
-# MNIST Classifier
+# Lightweight MNIST Classifier
+
+![Build Status](https://github.com/mshsingh772/Assignment5/actions/workflows/model_test.yml/badge.svg)
 
 A PyTorch implementation of a lightweight CNN for MNIST digit classification that achieves >95% accuracy in a single epoch with less than 25,000 parameters.
 

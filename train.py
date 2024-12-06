@@ -6,14 +6,25 @@ from mnist_model import LightMNIST, train_model, test_model, count_parameters
 def main():
     device = torch.device("cpu")
     
-    # Simple transform without augmentation
-    transform = transforms.Compose([
+    # Training transform with minimal augmentation
+    train_transform = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.RandomAffine(
+            degrees=1,              # Very small rotation
+            translate=(0.02, 0.02), # Small translation
+            scale=(0.98, 1.02)    # Minimal scaling
+        ),
+        transforms.Normalize((0.1307,), (0.3081,))
+    ])
+    
+    # Test transform without augmentation
+    test_transform = transforms.Compose([
         transforms.ToTensor(),
         transforms.Normalize((0.1307,), (0.3081,))
     ])
     
-    train_dataset = datasets.MNIST('./data', train=True, download=True, transform=transform)
-    test_dataset = datasets.MNIST('./data', train=False, transform=transform)
+    train_dataset = datasets.MNIST('./data', train=True, download=True, transform=train_transform)
+    test_dataset = datasets.MNIST('./data', train=False, transform=test_transform)
     
     train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
     test_loader = DataLoader(test_dataset, batch_size=500)
@@ -23,7 +34,7 @@ def main():
     # Simple SGD with momentum
     optimizer = torch.optim.SGD(
         model.parameters(),
-        lr=0.1,
+        lr=0.02,
         momentum=0.9,
         nesterov=True
     )

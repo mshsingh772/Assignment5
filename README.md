@@ -1,4 +1,4 @@
-# Lightweight MNIST Classifier
+# MNIST Classifier
 
 ![Build Status](https://github.com/mshsingh772/Assignment5/actions/workflows/model_test.yml/badge.svg)
 
@@ -7,8 +7,6 @@ A PyTorch implementation of a lightweight CNN for MNIST digit classification tha
 ## Model Architecture
 
 The model uses a lightweight CNN architecture optimized for quick learning:
-
-### Design Choices
 
 1. **Convolutional Layers**:
    - First layer: 8 filters to capture basic features
@@ -23,33 +21,7 @@ The model uses a lightweight CNN architecture optimized for quick learning:
 3. **Parameter Efficiency**:
    - Minimal number of filters (8→16)
    - Single fully connected layer
-   - Total parameters: ~9,146
 
-## Hyperparameters
-
-1. **Optimizer**: SGD with Nesterov Momentum
-   - Learning rate: 0.1
-   - Momentum: 0.9
-   - Nesterov: True
-
-
-3. **Data Preprocessing**:
-   - Normalization: mean=0.1307, std=0.3081 (MNIST statistics)
-   - No data augmentation
-
-## Why These Choices?
-
-1. **Minimal Architecture**:
-   - Progressive feature extraction (8→16 filters)
-   - Batch normalization for stable training
-   - Max pooling for spatial dimension reduction
-
-2. **SGD with Momentum**:
-   - Better generalization in short training periods
-   - Nesterov momentum for improved convergence
-
-
-3. **Parameter Count**:
    - First conv layer: 80 parameters
    - First batch norm: 16 parameters
    - Second conv layer: 1,168 parameters
@@ -57,11 +29,20 @@ The model uses a lightweight CNN architecture optimized for quick learning:
    - Final FC layer: 7,850 parameters
    - Total: 9,146 parameters
 
-## Requirements
+4. **Optimizer**: SGD with Nesterov Momentum
+   - Learning rate: 0.02
+   - Momentum: 0.9
+   - Nesterov: True
 
-- Python 3.8+
-- PyTorch
-- torchvision
+
+## Data Augmentation
+
+The following minimal augmentations are used during training:
+![Augmentation Examples](augmentation_examples.png)
+
+- Rotation: ±1 degree
+- Translation: ±2% in both directions
+- Scaling: 98-102% of original size
 
 
 ## GitHub Actions
